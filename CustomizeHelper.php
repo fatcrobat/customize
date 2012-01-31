@@ -53,46 +53,6 @@ class CustomizeHelper extends System
 		return $objLayout;
 	}
 	
-	/**
-	 * Helper Function to load all jQuery Versions as File
-	 */
-	public static function loadAlljQueryVersion()
-	{
-		$files = Files::getInstance();
-		
-		foreach ($GLOBALS['JQUERY_VERSIONS'] as $k=>$v)
-		{
-			foreach (array_values($v) as $version)
-			{
-				$target = self::$jqueryFolder . 'jquery-' .  $version . '.min.js';
-				$files->fopen($target, 'w');
-				$source = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js'); 
-				file_put_contents($target, $source);
-				$files->fclose($target);
-			}
-		}
-	}
-	
-	/**
-	 * Helper Function to load all jQuery UI Versions as File
-	 */
-	public static function loadAlljQueryUIVersion()
-	{
-		$files = Files::getInstance();
-		
-		foreach ($GLOBALS['JQUERYUI_VERSIONS'] as $k=>$v)
-		{
-			foreach (array_values($v) as $version)
-			{
-				$target = self::$jqueryUIFolder . 'jquery-ui-' .  $version . '.min.js';
-				$files->fopen($target, 'w');
-				$source = file_get_contents('http://ajax.googleapis.com/ajax/libs/jqueryui/'.$version.'/jquery-ui.min.js');
-				file_put_contents($target, $source);
-				$files->fclose($target);
-			}
-		}
-	}
-	
 	public static function getCustomScripts()
 	{
 		$scripts = array();

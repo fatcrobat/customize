@@ -1,0 +1,2 @@
+<?php $version = CustomizeHelper::getjQueryUIVersion(); ?>
+<script src="<?php echo CustomizeHelper::$jqueryUIFolder; ?>jquery-ui-<?php echo $version; ?>.min.js"></script>

@@ -1,0 +1,2 @@
+<?php $version = CustomizeHelper::getjQueryVersion(); ?>
+<script src="<?php echo CustomizeHelper::$jqueryFolder; ?>jquery-<?php echo $version; ?>.min.js"></script>

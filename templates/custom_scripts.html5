@@ -1,0 +1,6 @@
+<?php $scripts = CustomizeHelper::getCustomScripts();?>
+<?php if(is_array($scripts)): ?>
+<?php foreach ($scripts as $script):?>
+	<script src="<?php echo $script; ?>"></script>
+<?php endforeach; ?>
+<?php endif; ?>

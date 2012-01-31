@@ -1,0 +1,3 @@
+<?php $version = CustomizeHelper::getjQueryVersion(); ?>
+<script src="//code.jquery.com/jquery-<?php echo $version; ?>.min.js"></script>
+<script>window.jQuery || document.write('<script src="<?php echo CustomizeHelper::$jqueryFolder; ?>jquery-<?php echo $version; ?>.min.js"><\/script>')</script>

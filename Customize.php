@@ -17,13 +17,13 @@ class Customize extends PageRegular
 		
 		$head = deserialize($this->objLayout->head);
 		
-		
 		$this->footerJs = is_array($mootools) ? $mootools : array();
-		
 		
 		$this->addjQueryToLayout();
 		
 		$this->addjQueryUIToLayout();
+		
+		$this->addNoConflictMode();
 		
 		$this->addCustomJSToLayout();
 		
@@ -71,5 +71,10 @@ class Customize extends PageRegular
 		$objTemplate->version = $this->objLayout->jQueryUIVersion;
 		$objTemplate->theme = $this->objLayout->jQueryUITheme;
 		$GLOBALS['TL_HEAD'][] = $objTemplate->parse();
+	}
+	
+	protected function addNoConflictMode()
+	{
+		array_push($this->footerJs, 'jquery_noconflict');
 	}
 }

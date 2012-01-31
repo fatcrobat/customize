@@ -12,10 +12,6 @@ class CustomizeHelper extends System
 	{
 		$objLayout = self::getPageLayout();
 		
-		// uncomment to update local js + css files from google cdn
-// 		self::loadAlljQueryVersion(); 
-// 		self::loadAlljQueryUIVersion();
-		
 		return $objLayout->jQueryVersion;
 	}
 	

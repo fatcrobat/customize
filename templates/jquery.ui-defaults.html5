@@ -1,0 +1,23 @@
+<?php 
+$localFile = CustomizeHelper::$jqueryUIMiscFolder . '/jquery.ui.datepicker-' . $GLOBALS['TL_LANGUAGE'] . '.js';
+if(is_file($localFile)): ?>
+
+<script type="text/javascript">
+
+<?php echo file_get_contents($localFile); ?>
+
+var TL_JCONF = {
+		locale : <?php echo sprintf("'%s'", $GLOBALS['TL_LANGUAGE']); ?>,
+		dateFormat : <?php echo sprintf("'%s'", $GLOBALS['TL_CONFIG']['dateFormat']); ?>
+};
+
+/*********************************
+ ******* datepicker Defaults *****
+ *********************************/
+
+$.datepicker.setDefaults($.datepicker.regional[TL_JCONF.locale]);
+$.datepicker.setDefaults({
+	dateFormat : TL_JCONF.dateFormat
+});
+</script>
+<?php endif;?>

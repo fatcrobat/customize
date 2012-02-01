@@ -13,6 +13,7 @@ class CustomizeRunonce extends Controller
 		$this->import('Files');
 		$this->loadAlljQueryVersion();
 		$this->loadAlljQueryUIVersion();
+		$this->loadDatepickerLocales();
 	}
 	
 	/**
@@ -31,7 +32,11 @@ class CustomizeRunonce extends Controller
 		{
 			foreach (array_values($v) as $version)
 			{
-				$target = CustomizeHelper::$jqueryFolder . 'jquery-' .  $version . '.min.js';
+				$target = TL_ROOT . '/' . CustomizeHelper::$jqueryFolder . 'jquery-' .  $version . '.min.js';
+				if(file_exists($target))
+				{
+					continue;
+				}
 				$files->fopen($target, 'w');
 				$source = file_get_contents('http://ajax.googleapis.com/ajax/libs/jquery/'.$version.'/jquery.min.js'); 
 				file_put_contents($target, $source);
@@ -56,9 +61,49 @@ class CustomizeRunonce extends Controller
 		{
 			foreach (array_values($v) as $version)
 			{
-				$target = CustomizeHelper::$jqueryUIFolder . 'jquery-ui-' .  $version . '.min.js';
+				$target = TL_ROOT . '/' . CustomizeHelper::$jqueryUIFolder . 'jquery-ui-' .  $version . '.min.js';
+				if(file_exists($target))
+				{
+					continue;
+				}
 				$files->fopen($target, 'w');
 				$source = file_get_contents('http://ajax.googleapis.com/ajax/libs/jqueryui/'.$version.'/jquery-ui.min.js');
+				file_put_contents($target, $source);
+				$files->fclose($target);
+			}
+		}
+	}
+	
+	public function loadDatepickerLocales()
+	{
+		$url = 'http://jquery-ui.googlecode.com/svn/trunk/ui/i18n/';
+	
+		$arrFiles = array();
+	
+		$listFile = file_get_contents($url);
+	
+		preg_match_all('/[>](jquery.ui.datepicker-.*.js)/', $listFile, $matches);
+	
+		$arrFiles = $matches[1];
+	
+		$files = $this->Files;
+	
+		if(!is_dir(CustomizeHelper::$jqueryUIMiscFolder))
+		{
+			$files->mkdir(CustomizeHelper::$jqueryUIMiscFolder);
+		}
+	
+		if(is_array($arrFiles))
+		{
+			foreach($arrFiles as $fileName)
+			{
+				$target = TL_ROOT . '/' . CustomizeHelper::$jqueryUIMiscFolder . '/' . $fileName;
+				if(file_exists($target))
+				{
+					continue;
+				}
+				$files->fopen($target, 'w');
+				$source = file_get_contents($url . $fileName);
 				file_put_contents($target, $source);
 				$files->fclose($target);
 			}

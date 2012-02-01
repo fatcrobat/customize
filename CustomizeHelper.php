@@ -2,11 +2,15 @@
 
 class CustomizeHelper extends System
 {
+	public static $root = TL_ROOT;
+	
 	public static $jqueryFolder = 'plugins/jquery/';
 	
 	public static $jqueryUIFolder = 'plugins/jquery/ui/';
 	
 	public static $jqueryUIThemeFolder = 'plugins/jquery/ui/themes';
+	
+	public static $jqueryUIMiscFolder = 'plugins/jquery/ui/misc';
 	
 	public static function getjQueryVersion()
 	{
@@ -55,27 +59,22 @@ class CustomizeHelper extends System
 		
 		$objLayout = self::getPageLayout();
 		
-		$jqueryScripts = deserialize($objLayout->jQueryScripts);		
+		$scripts = deserialize($objLayout->jQueryScripts);		
 		
-		if(is_array($jqueryScripts))
+		if(is_array($scripts) && $objLayout->jQuerycombineScripts)
 		{
-			if($objLayout->jQuerycombineScripts)
+			$objCombiner = new Combiner();
+			
+			foreach($scripts as $script)
 			{
-				$objCombiner = new Combiner();
-				
-				foreach($jqueryScripts as $script)
+				if(is_file($script))
 				{
-					if(is_file($script))
-					{
-						$objCombiner->add($script, CUSTOMIZE);
-					}
+					$objCombiner->add($script, CUSTOMIZE);
 				}
-				return array($objCombiner->getCombinedFile(TL_PLUGINS_URL));
 			}
-			$scripts = $jqueryScripts;
+			return array($objCombiner->getCombinedFile(TL_PLUGINS_URL));
 		}
 		
 		return $scripts;
-	}
-
+	}	
 }

@@ -60,6 +60,8 @@ class Customize extends PageRegular
 		{
 			$this->addjQueryUITheme();
 			array_push($this->footerJs, sprintf('jquery.ui_%s', $this->objLayout->jQueryUISource));
+			// add jquery ui defaults like datepicker language from local...
+			array_push($this->footerJs, 'jquery.ui-defaults');
 			return true;
 		}
 		return false;

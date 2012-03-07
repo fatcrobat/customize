@@ -46,7 +46,7 @@ class Customize extends PageRegular
 	{
 		$jqueryScripts = deserialize($this->objLayout->jQueryScripts);
 		
-		if(is_array($jqueryScripts))
+		if(is_array($jqueryScripts) || is_array($GLOBALS['TL_JQUERY']))
 		{
 			array_push($this->footerJs, 'custom_scripts');
 			return true;
@@ -58,7 +58,10 @@ class Customize extends PageRegular
 	{
 		if($this->objLayout->addjQueryUI)
 		{
-			$this->addjQueryUITheme();
+			if($this->objLayout->jQueryUITheme)
+			{
+				$this->addjQueryUITheme();
+			}
 			array_push($this->footerJs, sprintf('jquery.ui_%s', $this->objLayout->jQueryUISource));
 			// add jquery ui defaults like datepicker language from local...
 			array_push($this->footerJs, 'jquery.ui-defaults');
@@ -77,6 +80,9 @@ class Customize extends PageRegular
 	
 	protected function addNoConflictMode()
 	{
-		array_push($this->footerJs, 'jquery_noconflict');
+		if($this->objLayout->addjQuery)
+		{
+			array_push($this->footerJs, 'jquery_noconflict');
+		}
 	}
 }

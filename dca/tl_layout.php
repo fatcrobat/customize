@@ -5,7 +5,7 @@ $GLOBALS['TL_DCA']['tl_layout']['palettes']['default'] = str_replace('head;', 'h
 
 array_push($GLOBALS['TL_DCA']['tl_layout']['palettes']['__selector__'], 'addjQuery', 'addjQueryUI');
 
-$GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addjQuery'] = 'jQueryVersion,jQuerySource,jQueryScripts,jQuerycombineScripts,addjQueryUI';
+$GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addjQuery'] = 'jQueryVersion,jQuerySource,jQueryScripts,jQueryModuleScriptsDisabled,jQuerycombineScripts,addjQueryUI';
 $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addjQueryUI'] = 'jQueryUIVersion, jQueryUISource, jQueryUITheme';
 
 
@@ -38,6 +38,14 @@ $GLOBALS['TL_DCA']['tl_layout']['fields']['jQueryScripts'] = array(
 	'exclude'                 => true,
 	'inputType'               => 'checkboxWizard',
 	'options_callback'        => array('tl_layout_customize', 'getjQueryScripts'),
+	'eval'                    => array('multiple'=>true, 'tl_class' => 'clr')
+);
+
+$GLOBALS['TL_DCA']['tl_layout']['fields']['jQueryModuleScriptsDisabled'] = array(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['jQueryModuleScriptsDisabled'],
+	'exclude'                 => true,
+	'inputType'               => 'checkboxWizard',
+	'options_callback'        => array('tl_layout_customize', 'getjQueryModuleScripts'),
 	'eval'                    => array('multiple'=>true, 'tl_class' => 'clr')
 );
 
@@ -176,6 +184,11 @@ class tl_layout_customize extends Backend
 		}
 		
 		return $scripts;
+	}
+	
+	public function getjQueryModuleScripts(DataContainer $dc)
+	{
+		return is_array($GLOBALS['TL_JQUERY']) ? $GLOBALS['TL_JQUERY'] : array();
 	}
 	
 	/**

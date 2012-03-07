@@ -12,6 +12,7 @@ $GLOBALS['TL_LANG']['tl_layout']['jQuerySourceOptions']['google'] = 'Google Ajax
 $GLOBALS['TL_LANG']['tl_layout']['jQuerySourceOptions']['microsoft'] = 'Microsoft CDN';
 $GLOBALS['TL_LANG']['tl_layout']['jQuerySourceOptions']['jquery'] = 'jQuery CDN'; 
 $GLOBALS['TL_LANG']['tl_layout']['jQueryScripts'] = array('jQuery Scripts', 'Zusätzliche jQuery Scripts innerhalb des Template Verzeichnisses kombiniert einbinden.');
+$GLOBALS['TL_LANG']['tl_layout']['jQueryModuleScriptsDisabled'] = array('jQuery Scripts von Modulen deaktivieren', 'Zusätzliche jQuery Scripts die von Modulen benötigt werden deaktivieren.');
 $GLOBALS['TL_LANG']['tl_layout']['jQuerycombineScripts'] = array('jQuery Scripts zusammenfassen', 'Um die Ladezeit Ihrere Webseite zu beschleunigen, empfiehlt es sich für den Live-Betrieb alle jQuery Scripte in eine einzelne Datei zusammen zu fassen.');
 $GLOBALS['TL_LANG']['tl_layout']['addjQueryUI'] = array('jQuery UI aktivieren', 'jQuery user interface Bibliothek aktivieren.');
 $GLOBALS['TL_LANG']['tl_layout']['jQueryUIVersion'] = array('jQuery UI Version', 'Bestimmen Sie, welche jQuery UI Version verwendet werden soll.');

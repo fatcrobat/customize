@@ -9,6 +9,8 @@ CREATE TABLE `tl_layout` (
   `jQueryVersion` varchar(16) NOT NULL default '',
   `jQuerySource` varchar(16) NOT NULL default '',
   `jQueryScripts` blob NULL,
+  `jQueryModuleScriptsDisabled` blob NULL,
+  `jQueryPlugins` blob NULL,
   `jQuerycombineScripts` char(1) NOT NULL default '',
   `addjQueryUI` char(1) NOT NULL default '',
   `jQueryUIVersion` varchar(16) NOT NULL default '',

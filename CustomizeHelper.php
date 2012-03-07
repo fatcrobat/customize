@@ -59,7 +59,23 @@ class CustomizeHelper extends System
 		
 		$objLayout = self::getPageLayout();
 		
-		$scripts = deserialize($objLayout->jQueryScripts);		
+		$scripts = deserialize($objLayout->jQueryScripts);
+		
+		// add scripts from globals (other modules)
+		if(isset($GLOBALS['TL_JQUERY']) && is_array($GLOBALS['TL_JQUERY']))
+		{
+			// filter out disabled scripts
+			$disabled = deserialize($objLayout->jQueryModuleScriptsDisabled);
+			
+			$mscripts = $GLOBALS['TL_JQUERY'];
+			
+			if(is_array($disabled))
+			{
+				$mscripts = array_diff($mscripts, $disabled);
+			}
+			
+			$scripts = array_merge(is_array($scripts) ? $scripts : array(), $mscripts);
+		}
 		
 		if(is_array($scripts) && $objLayout->jQuerycombineScripts)
 		{
@@ -67,7 +83,7 @@ class CustomizeHelper extends System
 			
 			foreach($scripts as $script)
 			{
-				if(is_file($script))
+				if(is_file(TL_ROOT . '/' . preg_replace('#^/#', '', $script)))
 				{
 					$objCombiner->add($script, CUSTOMIZE);
 				}

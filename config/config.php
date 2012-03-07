@@ -1,7 +1,7 @@
 <?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
 
 
-define('CUSTOMIZE', '0.1.0');
+define('CUSTOMIZE', '0.1.1');
 
 /**
  * Hooks
